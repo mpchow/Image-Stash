@@ -1,0 +1,20 @@
+import React from 'react';
+
+import LoginButton from '../LoginButton/loginButton';
+
+class Login extends React.Component {
+   constructor(props) {
+      super(props);
+   }
+
+   render() {
+      return (
+         <div>
+            <h1>Image Stash</h1>
+            <LoginButton history={this.props.history} />
+         </div>
+      )
+   }
+}
+
+export default Login;
