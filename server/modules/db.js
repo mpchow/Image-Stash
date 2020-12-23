@@ -1,4 +1,5 @@
-const url = 'mongodb+srv://expenseTracker:bgSlTwr5nCwMYJqw@cluster0-9tbyy.mongodb.net/test?retryWrites=true&w=majority';
+// const url = 'mongodb+srv://expenseTracker:bgSlTwr5nCwMYJqw@cluster0-9tbyy.mongodb.net/test?retryWrites=true&w=majority';
+const url = 'mongodb+srv://imageStashUser:qk4qtQotPj1VIZT3@cluster0.9tbyy.mongodb.net/Image-Stash?retryWrites=true&w=majority';
 
 const mongoose = require('mongoose');
 
@@ -14,8 +15,8 @@ const imageSchema = new Schema({
    userId: String,
 });
 
-const User = mongoose.model('User', userSchema);
-const Image = mongoose.model('Image', imageSchema);
+const User = mongoose.model('users', userSchema);
+const Image = mongoose.model('images', imageSchema);
 
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {console.log('MongoDB Connected…')})
