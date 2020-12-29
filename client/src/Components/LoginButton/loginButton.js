@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { GoogleLogin } from 'react-google-login';
 import { withRouter } from "react-router-dom";
-import key from '../../../googleAuthKey';
+import key from '../../googleAuthKey';
 
 class LoginButton extends React.Component {
    onSuccess (res) {
