@@ -1,15 +1,9 @@
 import React from 'react'; 
 import { GoogleLogin } from 'react-google-login';
 import { withRouter } from "react-router-dom";
-
-const clientId = 'Google_Client_Key_Here';
+import key from '../../../googleAuthKey';
 
 class LoginButton extends React.Component {
-   constructor(props) {
-      super(props);
-   }
-
-
    onSuccess (res) {
       console.log('[Login Success] currentUser:', res.profileObj);
       this.props.history.push('/dashboard');
@@ -23,7 +17,7 @@ class LoginButton extends React.Component {
       return (
          <div>
             <GoogleLogin
-               clientId={clientId}
+               clientId={key}
                buttonText="Login"
                onSuccess={this.onSuccess}
                onFailure={this.onFailure}
