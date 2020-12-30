@@ -1,34 +1,33 @@
 import React from 'react'; 
 import { GoogleLogin } from 'react-google-login';
-import { withRouter } from "react-router-dom";
 import key from '../../googleAuthKey';
+import { useHistory } from 'react-router-dom';
 
-class LoginButton extends React.Component {
-   onSuccess (res) {
+const LoginButton = () => {
+   const history = useHistory();
+
+   const onSuccess = (res) => {
       console.log('[Login Success] currentUser:', res.profileObj);
-      this.props.history.push('/dashboard');
+      history.push('/dashboard');
    }
 
-   onFailure (res) {
+   const onFailure = (res) => {
       console.log('[Login failed] res:', res);
    }
 
-   render() {
       return (
          <div>
             <GoogleLogin
                clientId={key}
                buttonText="Login"
-               onSuccess={this.onSuccess}
-               onFailure={this.onFailure}
+               onSuccess={onSuccess}
+               onFailure={onFailure}
                cookiePolicy={'single_host_origin'}
                style={{ marginTop: '100px' }}
                isSignedIn={true}
             />
          </div>
       )
-   }
 }
 
-// export default LoginButton;
-export default withRouter(LoginButton);
+export default LoginButton;
