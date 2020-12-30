@@ -7,7 +7,7 @@ class Login extends React.Component {
       return (
          <div>
             <h1>Image Stash</h1>
-            <LoginButton history={this.props.history} />
+            <LoginButton />
          </div>
       )
    }
