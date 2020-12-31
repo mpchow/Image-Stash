@@ -8,7 +8,10 @@ const LoginButton = () => {
 
    const onSuccess = (res) => {
       console.log('[Login Success] currentUser:', res.profileObj);
-      history.push('/dashboard');
+      history.push({
+            pathname: '/dashboard',
+            state: { email: res.profileObj.email}
+          });
    }
 
    const onFailure = (res) => {
