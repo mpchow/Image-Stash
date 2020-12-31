@@ -2,14 +2,15 @@ const url = require('./mongoAPI');
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
+
 const userSchema = new Schema({
-  id: String,
   email: String,
 });
 
 const imageSchema = new Schema({
-   path: String,
-   userId: String,
+   name: String,
+   userEmail: String,
+   path: String
 });
 
 const User = mongoose.model('users', userSchema);
