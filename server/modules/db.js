@@ -1,12 +1,10 @@
-const url = 'mongodb+srv://imageStashUser:<password>@cluster0.9tbyy.mongodb.net/Image-Stash?retryWrites=true&w=majority';
-
+const url = require('./mongoAPI');
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 const userSchema = new Schema({
   id: String,
   email: String,
-  images: [],
 });
 
 const imageSchema = new Schema({

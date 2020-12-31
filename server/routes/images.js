@@ -4,7 +4,7 @@ var router = express.Router();
 const imageDB = require('../modules/db').Image;
 
 
-router.get('/images', function(req, res, next) {
+router.get('/', function(req, res, next) {
   const param = req.body;
   imageDB.find({}, function(err, images) {
     if(err) {
@@ -16,17 +16,29 @@ router.get('/images', function(req, res, next) {
 
 });
 
-router.post('/images', function(req, res, next) {
+router.post('/', function(req, res, next) {
   const param = req.body;
-  imageDB.create({}, function(err, image) {
+  const image = new imageDB(param);
+
+  imageDB.findOne({path: param.path}, function(err, image) {
     if(err) {
-      throw new Error(err);
+      next(err);
     }
-    res.send({});
-  })
+    if (image !== null) {
+      res.send({msg: "Image already in db"})
+    }
+  });
+
+  image.save(function(err) {
+    if(err) {
+      next(err);
+    }
+  });
+
+  res.send({msg: "Success"});
 });
 
-router.delete('/images', function(req, res, next) {
+router.delete('/', function(req, res, next) {
   const param = req.body;
   imageDB.create({}, function(err, image) {
     if(err) {
