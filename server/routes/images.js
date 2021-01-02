@@ -3,19 +3,19 @@ var router = express.Router();
 
 const imageDB = require('../modules/db').Image;
 
-const getImgFile = (url, filename) => {
-  let arr = url.split(','),
-      mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]), 
-      n = bstr.length, 
-      u8arr = new Uint8Array(n);
+// const getImgFile = (url, filename) => {
+//   let arr = url.split(','),
+//       mime = arr[0].match(/:(.*?);/)[1],
+//       bstr = atob(arr[1]), 
+//       n = bstr.length, 
+//       u8arr = new Uint8Array(n);
       
-  while(n--){
-      u8arr[n] = bstr.charCodeAt(n);
-  }
+//   while(n--){
+//       u8arr[n] = bstr.charCodeAt(n);
+//   }
   
-  return new File([u8arr], filename, {type:mime});
-}
+//   return new File([u8arr], filename, {type:mime});
+// }
 
 
 router.get('/', function(req, res, next) {
@@ -44,7 +44,7 @@ router.post('/', function(req, res, next) {
       // }
     });
 
-    console.log(getImgFile(image.base64, image.name));
+    // console.log(getImgFile(image.base64, image.name));
 
     //GET the s3 path here
 
