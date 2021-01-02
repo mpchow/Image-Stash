@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 
 var imagesRouter = require('./routes/images');
 var usersRouter = require('./routes/users');
@@ -18,7 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.bodyParser({limit: '50mb'}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.use('/images', imagesRouter);
 app.use('/users', usersRouter);
