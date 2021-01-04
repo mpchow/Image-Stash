@@ -31,34 +31,38 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', async function(req, res, next) {
   const param = req.body;
   const images = param.images;
 
   images.forEach(image => {
-    let exists = true;
-    imageDB.findOne({userEmail: param.email, name: image.name}, function(err, img) {
-      if(err) {
-        next(err);
+    try {
+      const img = await imageDB.findOne({userEmail: param.email, name: image.name});
+      // , function(err, img) {
+      //   if(err) {
+      //     next(err);
+      //   }
+      //   if (img === null) {
+      //     exists = false;
+      //   }
+      // });
+      if(img === null) {
+        const path = `${param.email}/${image.name}`;
+        const type = image.type;
+        const base64Data = new Buffer.from(image.base64.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+    
+        const url = uploadToS3(base64Data, type, path);
+        const imageObj = new imageDB({name: image.name, userEmail: param.email, path: path, url: url});
+    
+        imageObj.save(function(err) {
+          if(err) {
+            // next(err);
+          }
+        });
       }
-      if (img === null) {
-        exists = false;
-      }
-    });
-
-    if(!exists) {
-      const path = `${param.email}/${image.name}`;
-      const type = image.type;
-      const base64Data = new Buffer.from(image.base64.replace(/^data:image\/\w+;base64,/, ""), 'base64');
-  
-      const url = uploadToS3(base64Data, type, path);
-      const imageObj = new imageDB({name: image.name, userEmail: param.email, path: path, url: url});
-  
-      imageObj.save(function(err) {
-        if(err) {
-          next(err);
-        }
-      });
+    }
+    catch (err) {
+      next(err);
     }
 
   });
