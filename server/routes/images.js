@@ -36,34 +36,29 @@ router.post('/', function(req, res, next) {
   const images = param.images;
 
   images.forEach(image => {
+
     imageDB.findOne({userEmail: param.email, name: image.name}, function(err, image) {
       if(err) {
         next(err);
       }
-      // if (image !== null) {
-      //   res.send({msg: "Image already in db"});
-      // }
-    });
-
-    // console.log(getImgFile(image.base64, image.name));
-
-    //GET the s3 path here
-    const path = `${param.email}/${image.name}`;
-    const type = image.type;
-    const base64Data = new Buffer.from(image.base64.replace(/^data:image\/\w+;base64,/, ""), 'base64');
-
-    uploadToS3(base64Data, type, path);
-    const imageObj = new imageDB({name: image.name, userEmail: param.email, path: path});
-
-    imageObj.save(function(err) {
-      if(err) {
-        next(err);
+      if (image === null) {
+        const path = `${param.email}/${image.name}`;
+        const type = image.type;
+        const base64Data = new Buffer.from(image.base64.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+    
+        uploadToS3(base64Data, type, path);
+        const imageObj = new imageDB({name: image.name, userEmail: param.email, path: path});
+    
+        imageObj.save(function(err) {
+          if(err) {
+            next(err);
+          }
+        });
       }
     });
+
+
   });
-  // for (let image in images) {
-    
-  // }
 
   res.send({msg: "Success"});
 });
