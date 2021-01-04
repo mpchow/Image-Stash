@@ -56,7 +56,7 @@ router.delete('/', function(req, res, next) {
     if(err) {
       throw new Error(err);
     }
-    await deleteFromS3(param.name);
+    await deleteFromS3(`${param.email}/${param.name}`);
 
     res.send({msg: "Success"});
   })

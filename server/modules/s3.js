@@ -34,7 +34,7 @@ const deleteFromS3 = async (path) => {
          Key: path
       };
       
-      await s3.deleteObject(s3params);
+      await s3.deleteObject(s3params).promise();
    }
    catch(err) {
       throw new Error(err);
