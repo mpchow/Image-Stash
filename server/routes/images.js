@@ -37,11 +37,11 @@ router.post('/', function(req, res, next) {
 
   images.forEach(image => {
 
-    imageDB.findOne({userEmail: param.email, name: image.name}, function(err, image) {
+    imageDB.findOne({userEmail: param.email, name: image.name}, function(err, img) {
       if(err) {
         next(err);
       }
-      if (image === null) {
+      if (img === null) {
         const path = `${param.email}/${image.name}`;
         const type = image.type;
         const base64Data = new Buffer.from(image.base64.replace(/^data:image\/\w+;base64,/, ""), 'base64');
