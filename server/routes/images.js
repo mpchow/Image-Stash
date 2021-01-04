@@ -4,20 +4,6 @@ var router = express.Router();
 const imageDB = require('../modules/db').Image;
 const uploadToS3 = require('../modules/s3');
 
-// const getImgFile = (url, filename) => {
-//   let arr = url.split(','),
-//       mime = arr[0].match(/:(.*?);/)[1],
-//       bstr = atob(arr[1]), 
-//       n = bstr.length, 
-//       u8arr = new Uint8Array(n);
-      
-//   while(n--){
-//       u8arr[n] = bstr.charCodeAt(n);
-//   }
-  
-//   return new File([u8arr], filename, {type:mime});
-// }
-
 
 router.get('/', function(req, res, next) {
   const param = req;
