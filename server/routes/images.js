@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 const imageDB = require('../modules/db').Image;
-const uploadToS3 = require('../modules/s3');
+const uploadToS3 = require('../modules/s3').uploadToS3;
+const deleteFromS3 = require('../modules/s3').deleteFromS3;
 
 
 router.get('/', function(req, res, next) {
@@ -55,6 +56,8 @@ router.delete('/', function(req, res, next) {
     if(err) {
       throw new Error(err);
     }
+    deleteFromS3(param.name);
+
     res.send({msg: "Success"});
   })
 });
