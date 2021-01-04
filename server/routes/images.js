@@ -52,11 +52,11 @@ router.post('/', function(req, res, next) {
 
 router.delete('/', function(req, res, next) {
   const param = req.body;
-  imageDB.deleteOne({userEmail: param.email, name: param.name}, function(err, image) {
+  imageDB.deleteOne({userEmail: param.email, name: param.name}, async function(err, image) {
     if(err) {
       throw new Error(err);
     }
-    deleteFromS3(param.name);
+    await deleteFromS3(param.name);
 
     res.send({msg: "Success"});
   })
