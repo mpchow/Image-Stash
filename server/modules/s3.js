@@ -19,15 +19,15 @@ const uploadToS3 = async (base64, type, path) => {
       ContentEncoding: 'base64',
       ContentType: type
    };
-
-   s3.upload(s3params, function(err, data) {
-      if (err) {
-          throw err;
-      }
+   try {
+      const data = await s3.upload(s3params);
       console.log(`File uploaded to ${data.Location}`);
       url = data.Location;
-   });
-   return url;
+     return url;
+   }
+   catch (err) {
+      throw new Error(err);
+   }
 }
 
 module.exports = uploadToS3;
