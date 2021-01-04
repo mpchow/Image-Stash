@@ -1,5 +1,5 @@
 # Image-Stash
-An image repository applcation built with React, Express, MongoDB, AWS EC2 and S3  
+A full stack image repository application built with React, Express, MongoDB, AWS EC2 and S3  
 You can view it [here](http://ec2-3-96-142-166.ca-central-1.compute.amazonaws.com:3000/)
 
 Image-Stash allows users to easily login with their Google account and manage photos in their stash.
