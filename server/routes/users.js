@@ -17,16 +17,20 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   const param = req.body;
 
-  userDB.create({}, function(err, person) {
+  userDB.findOne({email: param.email}, function(err, person) {
     if(err) {
       throw new Error(err);
     }
-    res.send({msg: "Success"});
+    if(person === null) {
+      const user = new userDB({email: param.email});
+      user.save(function(err) {
+        if(err) {
+          next(err);
+        }
+      });
+    }
   });
 
-
-  //TODO: Check if not in there
-  const user = userDB.create({});
   res.send({msg: 'Success'});
 });
 
