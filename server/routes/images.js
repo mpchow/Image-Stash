@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const imageDB = require('../modules/db').Image;
+const uploadToS3 = require('../modules/s3');
 
 // const getImgFile = (url, filename) => {
 //   let arr = url.split(','),
@@ -47,9 +48,11 @@ router.post('/', function(req, res, next) {
     // console.log(getImgFile(image.base64, image.name));
 
     //GET the s3 path here
+    const path = `${param.email}/${image.name}`;
+    const type = image.type;
 
-    const imageObj = new imageDB({name: image.name, userEmail: param.email, path: "Test"});
-
+    uploadToS3(image.base64, type, path);
+    const imageObj = new imageDB({name: image.name, userEmail: param.email, path: path});
 
     imageObj.save(function(err) {
       if(err) {
