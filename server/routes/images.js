@@ -51,7 +51,7 @@ router.post('/', function(req, res, next) {
 
 router.delete('/', function(req, res, next) {
   const param = req.body;
-  imageDB.create({userEmail: param.email, name: param.name}, function(err, image) {
+  imageDB.deleteOne({userEmail: param.email, name: param.name}, function(err, image) {
     if(err) {
       throw new Error(err);
     }
