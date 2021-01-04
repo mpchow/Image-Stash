@@ -31,21 +31,14 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.post('/', async function(req, res, next) {
+router.post('/', function(req, res, next) {
   const param = req.body;
   const images = param.images;
 
-  images.forEach(image => {
+  images.forEach(async image => {
     try {
       const img = await imageDB.findOne({userEmail: param.email, name: image.name});
-      // , function(err, img) {
-      //   if(err) {
-      //     next(err);
-      //   }
-      //   if (img === null) {
-      //     exists = false;
-      //   }
-      // });
+
       if(img === null) {
         const path = `${param.email}/${image.name}`;
         const type = image.type;
@@ -56,7 +49,7 @@ router.post('/', async function(req, res, next) {
     
         imageObj.save(function(err) {
           if(err) {
-            // next(err);
+            next(err);
           }
         });
       }
