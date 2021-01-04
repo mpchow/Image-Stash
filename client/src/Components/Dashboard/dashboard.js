@@ -22,10 +22,8 @@ const Dashboard = () => {
       })
       .then(res => res.json())
       .then(msg => {
-         console.log(msg);
          let prevState = images;
          msg.images.concat(prevState);
-         console.log(msg.images)
          setImages(msg.images);
       });
    }
@@ -43,7 +41,6 @@ const Dashboard = () => {
          })
       })
       .then(res => {
-         console.log(res.json());
          setTimeout(getImages, 50);
       });
    }
@@ -61,7 +58,6 @@ const Dashboard = () => {
          })
       })
       .then(res => {
-         console.log(res.json());
          setTimeout(getImages, 50);
       })
    }
@@ -73,7 +69,6 @@ const Dashboard = () => {
       let base64Images = [];
 
       for (let image of formData.values()) {
-         console.log(image);
          const base64Img = await imgToBase64(image);
          base64Images.push({base64: base64Img, name: image.name, email: email, type: image.type});
       }

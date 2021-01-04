@@ -17,7 +17,6 @@ const LoginButton = () => {
             email: email
          })
       })
-      .then(res => console.log(res.json()))
    }
 
    const onSuccess = (res) => {
