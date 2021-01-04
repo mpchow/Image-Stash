@@ -9,7 +9,8 @@ const s3 = new AWS.S3({
    secretAccessKey: secret 
 });
 
-const uploadToS3 = (base64, type, path) => {
+const uploadToS3 = async (base64, type, path) => {
+   let url;
    const s3params = {
       Bucket: bucket,
       Key: path,
@@ -24,8 +25,9 @@ const uploadToS3 = (base64, type, path) => {
           throw err;
       }
       console.log(`File uploaded to ${data.Location}`);
+      url = data.Location;
    });
-
+   return url;
 }
 
 module.exports = uploadToS3;
