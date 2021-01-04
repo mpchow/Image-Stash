@@ -4,6 +4,8 @@ You can view it [here](http://ec2-3-96-142-166.ca-central-1.compute.amazonaws.co
 
 Image-Stash allows users to easily login with their Google account and manage photos in their stash.
 
+To use, just login with your Google account and then start uploading photos (50mb max at a time). You can then view your current photos and add more or delete as you please.
+
 ## Running it yourself
 1. Set up Google oAuth2.0 and place the key in ```client/src/googleAuthKey.js```  
 2. Set up AWS access credentials and place the secrets in ```server/modules/s3.js```
