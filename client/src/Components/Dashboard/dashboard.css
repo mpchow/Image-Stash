@@ -1,0 +1,24 @@
+.dashboard {
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+}
+
+.dashboard-imgs {
+   margin-top: 10vh;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   width: 100vw;
+}
+
+.img {
+   max-width: 40vw;
+   max-height: 30vh;
+}
+
+.img-box {
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+}

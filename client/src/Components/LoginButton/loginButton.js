@@ -6,8 +6,23 @@ import { useHistory } from 'react-router-dom';
 const LoginButton = () => {
    const history = useHistory();
 
+   const createUser = (email) => {
+      fetch('http://ec2-3-96-142-166.ca-central-1.compute.amazonaws.com:3001/users', {
+         headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+         },
+         method: 'POST',
+         body: JSON.stringify({
+            email: email
+         })
+      })
+      .then(res => console.log(res.json()))
+   }
+
    const onSuccess = (res) => {
       console.log('[Login Success] currentUser:', res.profileObj);
+      createUser(res.profileObj.email);
       history.push({
             pathname: '/dashboard',
             state: { email: res.profileObj.email}
