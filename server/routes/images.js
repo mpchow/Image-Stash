@@ -50,8 +50,9 @@ router.post('/', function(req, res, next) {
     //GET the s3 path here
     const path = `${param.email}/${image.name}`;
     const type = image.type;
+    const base64Data = new Buffer.from(image.base64.replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
-    uploadToS3(image.base64, type, path);
+    uploadToS3(base64Data, type, path);
     const imageObj = new imageDB({name: image.name, userEmail: param.email, path: path});
 
     imageObj.save(function(err) {
