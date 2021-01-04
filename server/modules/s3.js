@@ -10,19 +10,23 @@ const s3 = new AWS.S3({
 });
 
 const uploadToS3 = async (base64, type, path) => {
-   let url;
-   const s3params = {
-      Bucket: bucket,
-      Key: path,
-      Body: base64,
-      ACL: 'public-read',
-      ContentEncoding: 'base64',
-      ContentType: type
-   };
    try {
-      const data = await s3.upload(s3params);
-      console.log(`File uploaded to ${data.Location}`);
-      url = data.Location;
+      let url;
+      const s3params = {
+         Bucket: bucket,
+         Key: path,
+         Body: base64,
+         ACL: 'public-read',
+         ContentEncoding: 'base64',
+         ContentType: type
+      };
+      await s3.upload(s3params, function(err, data) {
+        if (err) {
+            throw err;
+        }
+        console.log(`File uploaded to ${data.Location}`);
+        url = data.Location;
+     });
      return url;
    }
    catch (err) {
