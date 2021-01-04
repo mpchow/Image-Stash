@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 const id = '<AWSAccessKeyID Here>';
 const secret = '<AWSSecretKey Here>';
-const bucket = 'imagestashstorage';
+const bucket = '<Your Bucket Here>';
 
 const s3 = new AWS.S3({
    accessKeyId: id,
