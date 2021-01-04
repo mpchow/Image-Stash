@@ -35,7 +35,7 @@ router.post('/', function(req, res, next) {
   const param = req.body;
   const images = param.images;
 
-  for (let image in images) {
+  images.forEach(image => {
     imageDB.findOne({userEmail: param.email, name: image.name}, function(err, image) {
       if(err) {
         next(err);
@@ -59,7 +59,10 @@ router.post('/', function(req, res, next) {
         next(err);
       }
     });
-  }
+  });
+  // for (let image in images) {
+    
+  // }
 
   res.send({msg: "Success"});
 });
