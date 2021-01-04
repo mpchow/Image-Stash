@@ -12,10 +12,10 @@ const s3 = new AWS.S3({
 const uploadToS3 = (base64, type, path) => {
    const s3params = {
       Bucket: bucket,
-      key: path,
+      Key: path,
+      Body: base64,
       ACL: 'public-read',
       ContentEncoding: 'base64',
-      Body: base64,
       ContentType: type
    };
 
