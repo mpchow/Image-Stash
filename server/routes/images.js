@@ -7,7 +7,7 @@ const uploadToS3 = require('../modules/s3');
 
 router.get('/', function(req, res, next) {
   const param = req.query;
-  imageDB.find({userEmail: param.email}, function(err, images) {
+  imageDB.find({userEmail: param.user}, function(err, images) {
     if(err) {
       throw new Error(err);
     }
