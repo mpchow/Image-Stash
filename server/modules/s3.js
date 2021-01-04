@@ -27,7 +27,22 @@ const uploadToS3 = async (base64, type, path) => {
    }
 }
 
-module.exports = uploadToS3;
+const deleteFromS3 = async (path) => {
+   try {
+      const s3params = {
+         Bucket: bucket, 
+         Key: path
+      };
+      
+      await s3.deleteObject(s3params);
+   }
+   catch(err) {
+      throw new Error(err);
+   }
+
+}
+
+module.exports = {uploadToS3, deleteFromS3};
 
 
 
